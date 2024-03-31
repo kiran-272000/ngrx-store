@@ -1,0 +1,14 @@
+<div class="card m-3 p-3">
+    <div class="d-block mx-auto">
+        <img [src]="product.image" width="200px" height="200px">
+    </div>
+    <div class="d-flex fw-bold">
+        <p>{{product.title}}</p>
+    </div>
+    <p>{{product.description.slice(0,100)}}...</p>
+    <span>{{product.price | currency}}</span>
+    <div class="action-btns">
+        <button (click)="addtoCart(product)" class="btn btn-success mx-2">Add to cart</button>
+        <button class="btn btn-warning mx-2">View product</button>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<p>cart works!</p>
+
+
+<ul>
+    @for (item of cart$ |async; track $index) {
+        <li>
+            {{item.title}}
+            {{item.price}}
+            <button (click)="increment(item.id)" class="btn btn-primary mx-2">+</button>
+            <button (click)="decrement(item.id)" class class="btn btn-warning mx-2">-</button>
+            <button (click)="remove(item.id)" class class="btn btn-danger mx-2">Remove</button>
+        </li>
+    }
+</ul>
+
+
+<p class="">{{totalPrice$ | async | currency}}</p>
