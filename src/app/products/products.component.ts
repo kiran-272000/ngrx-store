@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../states/cart/cart.action';
 
+import * as ProductActions from '../states/product/product.action'
+import * as ProductSelector from '../states/product/product.selector'
+
 
 @Component({
   selector: 'app-products',
@@ -18,15 +21,18 @@ import { addToCart } from '../states/cart/cart.action';
 
 export class ProductsComponent implements OnInit {
   productService = inject(ProductService);
-  products$ =this.productService.getProducts() as Observable<IProduct[]>
+  products$!: Observable<IProduct[]>
+  error$!: Observable<string|null>;
 
   constructor(private store: Store<{cart: {products: IProduct[]}}>){
+    this.store.dispatch(ProductActions.loadProduct());
+    this.products$ = this.store.select(ProductSelector.selectAllProducts)
+    this.error$ = this.store.select(ProductSelector.selectProductError)
   }
 
   ngOnInit(): void { }
 
   addItemtoCart(product: IProduct){
     this.store.dispatch(addToCart({product}));
-
   }
 }

@@ -1,8 +1,12 @@
 
-<div class="row">
-    @for (item of products$ | async; track $index){
-        <span class="col-6">
-            <app-product-card [product]="item" (handleAdd)="addItemtoCart($event)"></app-product-card>
-        </span>
-    }
-</div>
+@if (error$ |async) {
+    <h1>{{error$}}</h1>
+}@else {
+    <div class="row">
+        @for (item of products$ | async; track $index){
+            <span class="col-3">
+                <app-product-card [product]="item" (handleAdd)="addItemtoCart($event)"></app-product-card>
+            </span>
+        }
+    </div>
+}
